@@ -1,1 +1,39 @@
+.form {
+    width: 68px;
 
+}
+
+
+.input_with_appended_unit input {
+    padding-right: 18px;
+    text-align: left;
+}
+.input_with_appended_unit span {
+    position: relative;
+    left: -30px;
+    font-family: sans-serif; /* Optional, just styling it so it looks nicer */
+    font-size: 10px; /* Optional, just styling it so it looks nicer */
+}
+
+
+
+.col-name {
+    float: left;
+    width: 18%;
+
+}
+.col-doors {
+    padding-left: 26%;
+        }
+.col-2 {
+    float: left;
+    width: 33.33%;
+}
+.col-3 {
+    float: left;
+    width: 25%;
+}
+.col-4 {
+    float: left;
+    width: 12.5%;
+}
