@@ -1,12 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
     <script language="javascript" type="text/javascript" src="wab.js"></script>
-    <script language="javascript" type="text/javascript" src="Chart.js"></script>
-    <script type="text/javascript" src="canvasjs.min.js"></script>
+    <script language="javascript" type="text/javascript" src="http://code.highcharts.com/highcharts.js"></script>
+    <script language="javascript" type="text/javascript" src="http://code.highcharts.com/highcharts-more.js"></script>
+    <script language="javascript" type="text/javascript" src="http://code.highcharts.com/modules/exporting.js"></script>
+
     <link rel="stylesheet" type="text/css" href="wab.css">
     <meta charset="UTF-8">
     <title>Helicopter's Weight and balance </title>
+
 </head>
 <br>
 
@@ -19,117 +23,90 @@
         <td>Date:</td>
     </tr>
     <tr>
-        <td><input type="text" name="serialnumber"   size="12" value="1082"  /></td>
-        <td><input type="text" name="registration"   size="12" value="EC-MDP"  /></td>
-        <td><input type="date" id="theDate"> </td>
+        <td><input type="text" name="serialnumber" size="12" value="1082"/></td>
+        <td><input type="text" name="registration" size="12" value="EC-MDP"/></td>
+        <td><input type="date" id="theDate"></td>
     </tr>
 </table>
 
 </br>
 
+<form name="formulario">
+    <div class="col-name">Equipped Aircraft:</div>
+    <input type="text" name="eaKg" class="form" value="" maxlength="3" pattern="\d*"/>
+    <input type="text" name="eaArmX" class="form" readonly value="2205" maxlength="3"/>
+    <input type="text" name="eaArmY" class="form" readonly value="-14" maxlength="3"/>
+    <input type="text" name="eaMomX" class="form" readonly value="" maxlength="3"/>
+    <input type="text" name="eaMomY" class="form" readonly value="" maxlength="3"/>
+    <br/>
 
-<form name="formulario">Equipped Aircraft:
-    <input type="text" name="eaKg"   size="12" value=""  />
-    <input type="text" name="eaArmX" size="12" readonly value="2205" />
-    <input type="text" name="eaArmY" size="12" readonly value="-14" />
-    <input type="text" name="eaMomX" size="12" readonly value="" />
-    <input type="text" name="eaMomY" size="12" readonly value="" />
-    <br/>Right Seat:
-    <input type="text" name="rsKg"   size="12" value="" />
-    <input type="text" name="rsArmX" size="12" readonly value="1300" />
-    <input type="text" name="rsArmY" size="12" readonly value="320" />
-    <input type="text" name="rsMomX" size="12" readonly value="" />
-    <input type="text" name="rsMomY" size="12" readonly value="" />
-    <br/>Left Seat:
-    <input type="text" name="lsKg"   size="12" value="" />
-    <input type="text" name="lsArmX" size="12" readonly value="1300" />
-    <input type="text" name="lsArmY" size="12" readonly value="-280" />
-    <input type="text" name="lsMomX" size="12" readonly value="" />
-    <input type="text" name="lsMomY" size="12" readonly value="" />
-    <br/>Left Door
-    <input type="checkbox" name="ldKg" value="-4.2" onchange="checkboxs()" checked />
-    <input type="text" name="ldArmX" size="12" readonly value="1250" />
-    <input type="text" name="ldArmY" size="12" readonly value="-600" />
-    <input type="text" name="ldMomX" size="12" readonly value="0" />
-    <input type="text" name="ldMomY" size="12" readonly value="0" />
-    <br/>Right Door:
-    <input type="checkbox" name="rdKg" checked onchange="checkboxs()" value="-4.2" />
-    <input type="text" name="rdArmX" size="12" readonly value="1250" />
-    <input type="text" name="rdArmY" size="12" readonly value="600" />
-    <input type="text" name="rdMomX" size="12" readonly value="0" />
-    <input type="text" name="rdMomY" size="12" readonly value="0" />
-    <br/>Main luggage comp:
-    <input type="text" name="mlKg"   size="12" value="" />
-    <input type="text" name="mlArmX" size="12" readonly value="1854" />
-    <input type="text" name="mlArmY" size="12" readonly value="323" />
-    <input type="text" name="mlMomX" size="12" readonly value="" />
-    <input type="text" name="mlMomY" size="12" readonly value="" />
-    <br/>Front luggage comp:
-    <input type="text" name="flKg"   size="12" value="" />
-    <input type="text" name="flArmX" size="12" readonly value="325" />
-    <input type="text" name="flArmY" size="12" readonly value="0" />
-    <input type="text" name="flMomX" size="12" readonly value="" />
-    <input type="text" name="flMomY" size="12" readonly value="" />
-    <br/>Fuel:
-    <input type="text" name="fuelQ"  size="12" value="" />
-    <input type="text" name="fuelKg" size="12" value="" />
-    <input type="text" name="fuelArmX" size="12" readonly value="1886" />
-    <input type="text" name="fuelArmY" size="12" readonly value="-338" />
-    <input type="text" name="fuelMomX" size="12" readonly value="" />
-    <input type="text" name="fuelMomY" size="12" readonly value="" />
-    <br/>Totals:
-    <input type="text" name="totalKg" size="12" readonly value="" />
-    <input type="text" name="totalArmX" size="12" readonly value="" />
-    <input type="text" name="totalArmY" size="12" readonly value="" />
-    <input type="text" name="totalMomX" size="12" readonly value="" />
-    <input type="text" name="totalMomY" size="12" readonly value="" />
+    <div class="col-name">Right Seat:</div>
+    <input type="text" name="rsKg" class="form" value="" placeholder="Pilot"/>
+    <input type="text" name="rsArmX" class="form" readonly value="1300"/>
+    <input type="text" name="rsArmY" class="form" readonly value="320"/>
+    <input type="text" name="rsMomX" class="form" readonly value=""/>
+    <input type="text" name="rsMomY" class="form" readonly value=""/>
+    <br/>
 
+    <div class="col-name">Left Seat:</div>
+    <input type="text" name="lsKg" class="form" value="" placeholder="Co-Pilot"/>
+    <input type="text" name="lsArmX" class="form" readonly value="1300"/>
+    <input type="text" name="lsArmY" class="form" readonly value="-280"/>
+    <input type="text" name="lsMomX" class="form" readonly value=""/>
+    <input type="text" name="lsMomY" class="form" readonly value=""/>
+    <br/>
+
+    <div class="col-name">Left Door:
+        <input type="checkbox" name="ldKg" value="-4.2" onchange="checkboxs()" checked></div>
+    <div class="col-doors"><input type="text" name="ldArmX" class="form" readonly value="1250"/>
+        <input type="text" name="ldArmY" class="form" readonly value="-600"/>
+        <input type="text" name="ldMomX" class="form" readonly value="0"/>
+        <input type="text" name="ldMomY" class="form" readonly value="0"/></div>
+    <div class="col-name">Right Door:
+        <input type="checkbox" name="rdKg" checked onchange="checkboxs()" value="-4.2"/>
+    </div>
+    <div class="col-doors"><input type="text" name="rdArmX" class="form" readonly value="1250"/>
+        <input type="text" name="rdArmY" class="form" readonly value="600"/>
+        <input type="text" name="rdMomX" class="form" readonly value="0"/>
+        <input type="text" name="rdMomY" class="form" readonly value="0"/></div>
+    <div class="col-name">Main luggage comp:</div>
+    <input type="text" name="mlKg" class="form" value="" placeholder="Max 41Kg"/>
+    <input type="text" name="mlArmX" class="form" readonly value="1854"/>
+    <input type="text" name="mlArmY" class="form" readonly value="323"/>
+    <input type="text" name="mlMomX" class="form" readonly value=""/>
+    <input type="text" name="mlMomY" class="form" readonly value=""/>
+    <br/>
+
+    <div class="col-name">Front luggage comp:</div>
+    <input type="text" name="flKg" class="form" value="" placeholder="Max 5Kg"/>
+    <input type="text" name="flArmX" class="form" readonly value="325"/>
+    <input type="text" name="flArmY" class="form" readonly value="0"/>
+    <input type="text" name="flMomX" class="form" readonly value=""/>
+    <input type="text" name="flMomY" class="form" readonly value=""/>
+    <br/>
+
+    <div class="col-name">Fuel:
+        <input type="text" name="fuelQ" class="form" value="" style="float: right"/></div>
+    <input type="text" name="fuelKg" class="form" value="" readonly/>
+    <input type="text" name="fuelArmX" class="form" readonly value="1886"/>
+    <input type="text" name="fuelArmY" class="form" readonly value="-338"/>
+    <input type="text" name="fuelMomX" class="form" readonly value=""/>
+    <input type="text" name="fuelMomY" class="form" readonly value=""/>
+    <br/>
+
+    <div class="col-name">Totals:</div>
+    <input type="text" name="totalKg" class="form" readonly value="" style="font-weight: bold"/>
+    <input type="text" name="totalArmX" class="form" readonly value=""/>
+    <input type="text" name="totalArmY" class="form" readonly value=""/>
+    <input type="text" name="totalMomX" class="form" readonly value=""/>
+    <input type="text" name="totalMomY" class="form" readonly value=""/>
+
+    </form>
 </form>
 
+<div id="graficaLong" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto"></div>
 
-<script type="text/javascript">
-    window.onload = function () {
-        var chart = new CanvasJS.Chart("chartContainer",
-                {
-                    title: {
-                        text: "CabriG2- Longitudinal balance diagram",
-                        fontColor: "brown"
-                    },
-                    exportEnabled: true,
-                    axisY: {
-                        includeZero: false
-                    },
-                    axisX: {
-                        interval: 50
-                    },
-                    data: [
-                        {
-                            type: "rangeArea",
-                            legendText: "Triangle Mark shows highest Range",
-                            legendMarkerColor: "brown",
-                            showInLegend: true,
-                            legendMarkerType: "triangle",
-                            fillOpacity: .5,
-                            dataPoints: [
-                                /*{ x: 10, y: [18.86, 40.76] }, //y:[Low, High]
-                                { x: 20, y: [55.95, 78.26] },
-                                { x: 30, y: [48.27, 72.90] },
-                                { x: 40, y: [67.65, 109.65], markerType: "triangle", markerColor: "brown", markerSize: 10},
-                                { x: 50, y: [25.50, 51.26] }*/
-                                { x: 2120, y: [470, 500] },
-                                { x: 2025, y: [507, 700]},
-                                { x: 1915, y: [550, 700]}
-                                { x: 2000, y: 600 , markerType: "triangle", markerColor: "brown", markerSize: 10},
-                            ]
-                        }
-                    ]
-                });
-        chart.render();
-    }
-</script>
-
-<div id="chartContainer" style="height: 300px; width: 100%;">
-</div>
+<div id="graficaLat" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto"></div>
 
 
 </body>
